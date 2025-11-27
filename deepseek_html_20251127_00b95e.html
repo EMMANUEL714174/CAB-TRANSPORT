@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cab - Transportation Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2e7d32;
+            --primary-dark: #1b5e20;
+            --primary-light: #4caf50;
+            --accent: #ff9800;
+            --light: #f5f5f5;
+            --dark: #333;
+            --gray: #757575;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-circle {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1500&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .hero .btn {
+            padding: 12px 30px;
+            font-size: 18px;
+        }
+
+        /* Services Section */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            background-color: var(--primary);
+            color: white;
+            font-size: 40px;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .service-content {
+            padding: 25px;
+        }
+
+        .service-content h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        /* Ride Request Section */
+        .ride-request {
+            background-color: white;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        /* Map Section */
+        .map-container {
+            height: 400px;
+            margin-top: 30px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        #map {
+            height: 100%;
+            width: 100%;
+            background-color: #e9ecef;
+        }
+
+        .map-overlay {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        .map-controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            z-index: 10;
+        }
+
+        .map-control {
+            background: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 2px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .map-legend {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: white;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 10;
+            font-size: 12px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 5px;
+        }
+
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+        }
+
+        .legend-blue {
+            background-color: #4285F4;
+        }
+
+        .legend-green {
+            background-color: #34A853;
+        }
+
+        .legend-red {
+            background-color: #EA4335;
+        }
+
+        /* Admin Section */
+        .admin-section {
+            display: none;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .admin-tab {
+            padding: 10px 20px;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .admin-tab.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .admin-content {
+            display: none;
+        }
+
+        .admin-content.active {
+            display: block;
+        }
+
+        .ride-requests-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .ride-requests-table th, .ride-requests-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .ride-requests-table th {
+            background-color: #f5f5f5;
+            font-weight: 600;
+        }
+
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status-assigned {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .status-completed {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        /* Pricing Section */
+        .pricing-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 30px;
+            transition: transform 0.3s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .price {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 20px 0;
+        }
+
+        .currency {
+            font-size: 20px;
+            vertical-align: super;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--primary-light);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--primary-light);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            color: var(--primary);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        /* Password Section */
+        .password-section {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .password-section h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            nav ul {
+                gap: 15px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .ride-request {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-circle">Cab</div>
+                    <div class="logo-text">Cab Transportation</div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#request">Request Ride</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <button class="btn btn-outline" id="adminLoginBtn">Admin Login</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Reliable Transportation Services in Uganda</h1>
+            <p>We provide safe, comfortable, and timely transportation for people and goods across Kampala and beyond. Book your ride today!</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="scrollToRequest()">Book a Ride</button>
+                <button class="btn btn-outline">Learn More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>We offer a variety of transportation solutions to meet your needs</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Passenger Transport</h3>
+                        <p>Comfortable and safe rides for individuals and groups. Our professional drivers ensure you reach your destination on time.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-truck-loading"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Goods Delivery</h3>
+                        <p>Fast and reliable delivery services for packages and goods of all sizes across Kampala and surrounding areas.</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Corporate Services</h3>
+                        <p>Dedicated transportation solutions for businesses and corporate clients with customized plans.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="section" id="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Pricing</h2>
+                <p>Affordable rates in Ugandan Shillings (UGX)</p>
+            </div>
+            <div class="services-grid">
+                <div class="pricing-card">
+                    <h3>Standard Ride</h3>
+                    <div class="price"><span class="currency">UGX</span> 15,000</div>
+                    <p>Up to 5 km within city limits</p>
+                    <p>Additional: UGX 2,500 per km</p>
+                </div>
+                <div class="pricing-card">
+                    <h3>Premium Ride</h3>
+                    <div class="price"><span class="currency">UGX</span> 25,000</div>
+                    <p>Up to 5 km within city limits</p>
+                    <p>Luxury vehicles with premium service</p>
+                </div>
+                <div class="pricing-card">
+                    <h3>Goods Delivery</h3>
+                    <div class="price"><span class="currency">UGX</span> 10,000</div>
+                    <p>Up to 3 km within city limits</p>
+                    <p>Additional: UGX 1,500 per km</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ride Request Section -->
+    <section class="section" id="request">
+        <div class="container">
+            <div class="section-title">
+                <h2>Request a Ride</h2>
+                <p>Share your location and we'll dispatch a driver to pick you up</p>
+            </div>
+            <div class="ride-request">
+                <form id="rideRequestForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceType">Service Type</label>
+                        <select id="serviceType" class="form-control" required>
+                            <option value="">Select service type</option>
+                            <option value="passenger">Passenger Transport</option>
+                            <option value="goods">Goods Delivery</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="destination">Destination</label>
+                        <input type="text" id="destination" class="form-control" placeholder="Enter your destination" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Additional Notes</label>
+                        <textarea id="notes" class="form-control" rows="3" placeholder="Any special requirements?"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-outline" id="getLocationBtn">
+                            <i class="fas fa-location-arrow"></i> Share My Location
+                        </button>
+                        <span id="locationStatus">Location not shared yet</span>
+                    </div>
+                    <div class="form-group" id="estimatedCostContainer" style="display: none;">
+                        <label>Estimated Cost</label>
+                        <div id="estimatedCost" style="font-size: 18px; font-weight: bold; color: var(--primary);"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px;">
+                        Request Ride
+                    </button>
+                </form>
+                
+                <div class="map-container">
+                    <div id="map">
+                        <!-- Google Maps will be rendered here -->
+                        <div class="map-overlay">
+                            <strong>Kampala, Uganda</strong>
+                        </div>
+                        <div class="map-controls">
+                            <button class="map-control" id="zoomIn">+</button>
+                            <button class="map-control" id="zoomOut">-</button>
+                            <button class="map-control" id="resetView"><i class="fas fa-crosshairs"></i></button>
+                        </div>
+                        <div class="map-legend">
+                            <div class="legend-item">
+                                <div class="legend-color legend-blue"></div>
+                                <span>Your Location</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color legend-green"></div>
+                                <span>Available Drivers</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color legend-red"></div>
+                                <span>Destination</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Section -->
+    <section class="section">
+        <div class="container">
+            <div class="admin-section" id="adminPanel">
+                <div class="admin-header">
+                    <h2>Admin Dashboard</h2>
+                    <button class="btn btn-outline" id="logoutBtn">Logout</button>
+                </div>
+                
+                <div class="admin-tabs">
+                    <div class="admin-tab active" data-tab="rides">Ride Requests</div>
+                    <div class="admin-tab" data-tab="drivers">Drivers</div>
+                    <div class="admin-tab" data-tab="settings">Settings</div>
+                    <div class="admin-tab" data-tab="security">Security</div>
+                </div>
+                
+                <div class="admin-content active" id="ridesContent">
+                    <h3>Recent Ride Requests</h3>
+                    <table class="ride-requests-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Customer</th>
+                                <th>Service Type</th>
+                                <th>Location</th>
+                                <th>Destination</th>
+                                <th>Estimated Cost</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ridesTableBody">
+                            <!-- Ride requests will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="admin-content" id="driversContent">
+                    <h3>Registered Drivers</h3>
+                    <table class="ride-requests-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Vehicle</th>
+                                <th>Phone</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="driversTableBody">
+                            <!-- Drivers will be populated here -->
+                        </tbody>
+                    </table>
+                    <button class="btn btn-primary" style="margin-top: 20px;" id="addDriverBtn">Add New Driver</button>
+                </div>
+                
+                <div class="admin-content" id="settingsContent">
+                    <h3>Website Settings</h3>
+                    <div class="form-group">
+                        <label for="companyName">Company Name</label>
+                        <input type="text" id="companyName" class="form-control" value="Cab Transportation">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactEmail">Contact Email</label>
+                        <input type="email" id="contactEmail" class="form-control" value="info@cabtransport.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactPhone">Contact Phone</label>
+                        <input type="tel" id="contactPhone" class="form-control" value="+256 700 123 456">
+                    </div>
+                    <div class="form-group">
+                        <label for="baseFare">Base Fare (UGX)</label>
+                        <input type="number" id="baseFare" class="form-control" value="15000" step="1000">
+                    </div>
+                    <div class="form-group">
+                        <label for="ratePerKm">Rate per KM (UGX)</label>
+                        <input type="number" id="ratePerKm" class="form-control" value="2500" step="500">
+                    </div>
+                    <button class="btn btn-primary" id="saveSettingsBtn">Save Settings</button>
+                </div>
+                
+                <div class="admin-content" id="securityContent">
+                    <h3>Security Settings</h3>
+                    <div class="password-section">
+                        <h3>Change Admin Password</h3>
+                        <div class="form-group">
+                            <label for="currentPassword">Current Password</label>
+                            <input type="password" id="currentPassword" class="form-control" placeholder="Enter current password">
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">New Password</label>
+                            <input type="password" id="newPassword" class="form-control" placeholder="Enter new password">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirm New Password</label>
+                            <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm new password">
+                        </div>
+                        <button class="btn btn-primary" id="changePasswordBtn">Change Password</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Cab Transportation</h3>
+                    <p>Providing reliable transportation services for people and goods across Uganda since 2010.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#request">Request Ride</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Plot 123, Kampala Road, Kampala</li>
+                        <li><i class="fas fa-phone"></i> +256 700 123 456</li>
+                        <li><i class="fas fa-envelope"></i> info@cabtransport.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Cab Transportation. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Admin Login Modal -->
+    <div class="modal" id="adminLoginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Admin Login</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="adminLoginForm">
+                <div class="form-group">
+                    <label for="adminPassword">Password</label>
+                    <input type="password" id="adminPassword" class="form-control" placeholder="Enter admin password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Ride Request Submitted</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <p>Your ride request has been submitted successfully. A driver will be assigned to you shortly.</p>
+            <p><strong>Request ID:</strong> <span id="requestId"></span></p>
+            <p><strong>Estimated Cost:</strong> <span id="estimatedCostDisplay"></span></p>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 20px;" onclick="closeSuccessModal()">OK</button>
+        </div>
+    </div>
+
+    <!-- Add Driver Modal -->
+    <div class="modal" id="addDriverModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Driver</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="addDriverForm">
+                <div class="form-group">
+                    <label for="driverName">Driver Name</label>
+                    <input type="text" id="driverName" class="form-control" placeholder="Enter driver name" required>
+                </div>
+                <div class="form-group">
+                    <label for="driverPhone">Phone Number</label>
+                    <input type="tel" id="driverPhone" class="form-control" placeholder="Enter phone number" required>
+                </div>
+                <div class="form-group">
+                    <label for="driverVehicle">Vehicle Details</label>
+                    <input type="text" id="driverVehicle" class="form-control" placeholder="Enter vehicle model and plate" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Add Driver</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Application data
+        const appData = {
+            settings: {
+                companyName: "Cab Transportation",
+                contactEmail: "info@cabtransport.com",
+                contactPhone: "+256 700 123 456",
+                baseFare: 15000,
+                ratePerKm: 2500
+            },
+            rideRequests: JSON.parse(localStorage.getItem('rideRequests')) || [],
+            drivers: JSON.parse(localStorage.getItem('drivers')) || [
+                { id: "D001", name: "John Smith", phone: "+256 700 111 111", vehicle: "Toyota Camry - UAA 123A", status: "available" },
+                { id: "D002", name: "Maria Garcia", phone: "+256 700 222 222", vehicle: "Honda Civic - UAB 456B", status: "on-trip" },
+                { id: "D003", name: "Robert Johnson", phone: "+256 700 333 333", vehicle: "Ford Transit - UAC 789C", status: "available" }
+            ],
+            nextRequestId: JSON.parse(localStorage.getItem('nextRequestId')) || 1,
+            nextDriverId: JSON.parse(localStorage.getItem('nextDriverId')) || 4,
+            adminPassword: localStorage.getItem('adminPassword') || 'admin123'
+        };
+
+        // Format UGX currency
+        function formatUGX(amount) {
+            return new Intl.NumberFormat('en-UG', {
+                style: 'currency',
+                currency: 'UGX',
+                minimumFractionDigits: 0
+            }).format(amount);
+        }
+
+        // Get user's location
+        document.getElementById('getLocationBtn').addEventListener('click', function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        const userLocation = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        
+                        // Update status
+                        document.getElementById('locationStatus').textContent = 
+                            `Location shared: ${userLocation.lat.toFixed(4)}, ${userLocation.lng.toFixed(4)}`;
+                        document.getElementById('locationStatus').style.color = 'green';
+                        
+                        // Store location for form submission
+                        document.getElementById('getLocationBtn').dataset.location = 
+                            JSON.stringify(userLocation);
+                        
+                        // Calculate and display estimated cost
+                        const destination = document.getElementById('destination').value;
+                        if (destination) {
+                            calculateEstimatedCost(destination);
+                        }
+                    },
+                    function(error) {
+                        alert('Error getting location: ' + error.message);
+                        document.getElementById('locationStatus').textContent = 
+                            'Error getting location';
+                        document.getElementById('locationStatus').style.color = 'red';
+                    }
+                );
+            } else {
+                alert('Geolocation is not supported by this browser.');
+            }
+        });
+
+        // Calculate estimated cost based on destination
+        function calculateEstimatedCost(destination) {
+            // In a real app, this would use a mapping API to calculate distance
+            // For demo purposes, we'll use a simple calculation
+            const baseFare = appData.settings.baseFare;
+            const ratePerKm = appData.settings.ratePerKm;
+            
+            // Generate a random distance between 3 and 20 km
+            const distanceKm = Math.floor(Math.random() * 17) + 3;
+            
+            // Calculate cost: base fare + (distance in km * rate per km)
+            const cost = baseFare + (distanceKm * ratePerKm);
+            const roundedCost = Math.round(cost / 1000) * 1000; // Round to nearest 1000 UGX
+            
+            // Display estimated cost
+            document.getElementById('estimatedCost').textContent = formatUGX(roundedCost);
+            document.getElementById('estimatedCostContainer').style.display = 'block';
+            
+            // Store estimated cost for form submission
+            document.getElementById('getLocationBtn').dataset.estimatedCost = roundedCost;
+            document.getElementById('getLocationBtn').dataset.distance = distanceKm;
+        }
+
+        // Handle ride request form submission
+        document.getElementById('rideRequestForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const serviceType = document.getElementById('serviceType').value;
+            const destination = document.getElementById('destination').value;
+            const notes = document.getElementById('notes').value;
+            
+            // Get location if shared
+            let location = null;
+            const locationData = document.getElementById('getLocationBtn').dataset.location;
+            if (locationData) {
+                location = JSON.parse(locationData);
+            }
+            
+            // Get estimated cost if calculated
+            let estimatedCost = 0;
+            const costData = document.getElementById('getLocationBtn').dataset.estimatedCost;
+            if (costData) {
+                estimatedCost = parseInt(costData);
+            } else {
+                // Use base fare if no route calculated
+                estimatedCost = appData.settings.baseFare;
+            }
+            
+            // Generate a unique ID
+            const requestId = 'R' + appData.nextRequestId.toString().padStart(3, '0');
+            appData.nextRequestId++;
+            
+            // Add to ride requests
+            appData.rideRequests.unshift({
+                id: requestId,
+                name: name,
+                phone: phone,
+                serviceType: serviceType,
+                destination: destination,
+                location: location,
+                estimatedCost: estimatedCost,
+                status: 'pending',
+                notes: notes,
+                timestamp: new Date().toISOString()
+            });
+            
+            // Save to localStorage
+            localStorage.setItem('rideRequests', JSON.stringify(appData.rideRequests));
+            localStorage.setItem('nextRequestId', JSON.stringify(appData.nextRequestId));
+            
+            // Update admin panel if visible
+            if (document.getElementById('adminPanel').style.display === 'block') {
+                updateRidesTable();
+            }
+            
+            // Show success modal
+            document.getElementById('requestId').textContent = requestId;
+            document.getElementById('estimatedCostDisplay').textContent = formatUGX(estimatedCost);
+            document.getElementById('successModal').style.display = 'flex';
+            
+            // Reset form
+            document.getElementById('rideRequestForm').reset();
+            document.getElementById('locationStatus').textContent = 'Location not shared yet';
+            document.getElementById('locationStatus').style.color = 'inherit';
+            document.getElementById('estimatedCostContainer').style.display = 'none';
+            delete document.getElementById('getLocationBtn').dataset.location;
+            delete document.getElementById('getLocationBtn').dataset.estimatedCost;
+        });
+
+        // Admin login
+        document.getElementById('adminLoginBtn').addEventListener('click', function() {
+            document.getElementById('adminLoginModal').style.display = 'flex';
+        });
+
+        // Admin login form submission
+        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const password = document.getElementById('adminPassword').value;
+            
+            // Check password
+            if (password === appData.adminPassword) {
+                document.getElementById('adminPanel').style.display = 'block';
+                document.getElementById('adminLoginModal').style.display = 'none';
+                updateRidesTable();
+                updateDriversTable();
+                
+                // Scroll to admin section
+                document.getElementById('adminPanel').scrollIntoView({ behavior: 'smooth' });
+            } else {
+                alert('Incorrect password. Please try again.');
+            }
+        });
+
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            document.getElementById('adminPanel').style.display = 'none';
+            document.getElementById('adminPassword').value = '';
+        });
+
+        // Admin tabs
+        document.querySelectorAll('.admin-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs
+                document.querySelectorAll('.admin-tab').forEach(t => {
+                    t.classList.remove('active');
+                });
+                
+                // Add active class to clicked tab
+                this.classList.add('active');
+                
+                // Hide all content
+                document.querySelectorAll('.admin-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Show corresponding content
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(tabId + 'Content').classList.add('active');
+            });
+        });
+
+        // Update rides table in admin panel
+        function updateRidesTable() {
+            const tableBody = document.getElementById('ridesTableBody');
+            tableBody.innerHTML = '';
+            
+            appData.rideRequests.forEach(request => {
+                const row = document.createElement('tr');
+                
+                // Status badge
+                let statusBadge = '';
+                if (request.status === 'pending') {
+                    statusBadge = '<span class="status-badge status-pending">Pending</span>';
+                } else if (request.status === 'assigned') {
+                    statusBadge = '<span class="status-badge status-assigned">Assigned</span>';
+                } else if (request.status === 'completed') {
+                    statusBadge = '<span class="status-badge status-completed">Completed</span>';
+                }
+                
+                // Location text
+                let locationText = 'Not shared';
+                if (request.location) {
+                    locationText = `${request.location.lat.toFixed(4)}, ${request.location.lng.toFixed(4)}`;
+                }
+                
+                row.innerHTML = `
+                    <td>${request.id}</td>
+                    <td>${request.name}<br><small>${request.phone}</small></td>
+                    <td>${request.serviceType === 'passenger' ? 'Passenger' : 'Goods Delivery'}</td>
+                    <td>${locationText}</td>
+                    <td>${request.destination}</td>
+                    <td>${formatUGX(request.estimatedCost)}</td>
+                    <td>${statusBadge}</td>
+                    <td>
+                        <button class="btn btn-outline" style="padding: 5px 10px;" onclick="assignDriver('${request.id}')">Assign Driver</button>
+                        <button class="btn btn-outline" style="padding: 5px 10px;" onclick="completeRide('${request.id}')">Complete</button>
+                    </td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Update drivers table in admin panel
+        function updateDriversTable() {
+            const tableBody = document.getElementById('driversTableBody');
+            tableBody.innerHTML = '';
+            
+            appData.drivers.forEach(driver => {
+                const row = document.createElement('tr');
+                
+                // Status badge
+                let statusBadge = '';
+                if (driver.status === 'available') {
+                    statusBadge = '<span class="status-badge status-assigned">Available</span>';
+                } else if (driver.status === 'on-trip') {
+                    statusBadge = '<span class="status-badge status-pending">On Trip</span>';
+                }
+                
+                row.innerHTML = `
+                    <td>${driver.id}</td>
+                    <td>${driver.name}</td>
+                    <td>${driver.vehicle}</td>
+                    <td>${driver.phone}</td>
+                    <td>${statusBadge}</td>
+                    <td>
+                        <button class="btn btn-outline" style="padding: 5px 10px;" onclick="toggleDriverStatus('${driver.id}')">Toggle Status</button>
+                        <button class="btn btn-outline" style="padding: 5px 10px;" onclick="deleteDriver('${driver.id}')">Delete</button>
+                    </td>
+                `;
+                
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Assign driver to ride
+        function assignDriver(requestId) {
+            const request = appData.rideRequests.find(r => r.id === requestId);
+            if (request) {
+                // Find an available driver
+                const availableDriver = appData.drivers.find(d => d.status === 'available');
+                if (availableDriver) {
+                    request.status = 'assigned';
+                    request.assignedDriver = availableDriver.id;
+                    availableDriver.status = 'on-trip';
+                    
+                    // Save to localStorage
+                    localStorage.setItem('rideRequests', JSON.stringify(appData.rideRequests));
+                    localStorage.setItem('drivers', JSON.stringify(appData.drivers));
+                    
+                    updateRidesTable();
+                    updateDriversTable();
+                    alert(`Driver ${availableDriver.name} assigned to request ${requestId}`);
+                } else {
+                    alert('No available drivers at the moment.');
+                }
+            }
+        }
+
+        // Complete ride
+        function completeRide(requestId) {
+            const request = appData.rideRequests.find(r => r.id === requestId);
+            if (request) {
+                request.status = 'completed';
+                
+                // If a driver was assigned, mark them as available again
+                if (request.assignedDriver) {
+                    const driver = appData.drivers.find(d => d.id === request.assignedDriver);
+                    if (driver) {
+                        driver.status = 'available';
+                    }
+                }
+                
+                // Save to localStorage
+                localStorage.setItem('rideRequests', JSON.stringify(appData.rideRequests));
+                localStorage.setItem('drivers', JSON.stringify(appData.drivers));
+                
+                updateRidesTable();
+                updateDriversTable();
+                alert(`Ride ${requestId} marked as completed`);
+            }
+        }
+
+        // Toggle driver status
+        function toggleDriverStatus(driverId) {
+            const driver = appData.drivers.find(d => d.id === driverId);
+            if (driver) {
+                driver.status = driver.status === 'available' ? 'on-trip' : 'available';
+                
+                // Save to localStorage
+                localStorage.setItem('drivers', JSON.stringify(appData.drivers));
+                
+                updateDriversTable();
+            }
+        }
+
+        // Delete driver
+        function deleteDriver(driverId) {
+            if (confirm('Are you sure you want to delete this driver?')) {
+                appData.drivers = appData.drivers.filter(d => d.id !== driverId);
+                
+                // Save to localStorage
+                localStorage.setItem('drivers', JSON.stringify(appData.drivers));
+                
+                updateDriversTable();
+            }
+        }
+
+        // Add new driver
+        document.getElementById('addDriverBtn').addEventListener('click', function() {
+            document.getElementById('addDriverModal').style.display = 'flex';
+        });
+
+        // Add driver form submission
+        document.getElementById('addDriverForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('driverName').value;
+            const phone = document.getElementById('driverPhone').value;
+            const vehicle = document.getElementById('driverVehicle').value;
+            
+            // Generate a unique ID
+            const driverId = 'D' + appData.nextDriverId.toString().padStart(3, '0');
+            appData.nextDriverId++;
+            
+            // Add to drivers
+            appData.drivers.push({
+                id: driverId,
+                name: name,
+                phone: phone,
+                vehicle: vehicle,
+                status: 'available'
+            });
+            
+            // Save to localStorage
+            localStorage.setItem('drivers', JSON.stringify(appData.drivers));
+            localStorage.setItem('nextDriverId', JSON.stringify(appData.nextDriverId));
+            
+            updateDriversTable();
+            document.getElementById('addDriverModal').style.display = 'none';
+            document.getElementById('addDriverForm').reset();
+            
+            alert(`Driver ${name} added successfully!`);
+        });
+
+        // Save settings
+        document.getElementById('saveSettingsBtn').addEventListener('click', function() {
+            appData.settings.companyName = document.getElementById('companyName').value;
+            appData.settings.contactEmail = document.getElementById('contactEmail').value;
+            appData.settings.contactPhone = document.getElementById('contactPhone').value;
+            appData.settings.baseFare = parseInt(document.getElementById('baseFare').value);
+            appData.settings.ratePerKm = parseInt(document.getElementById('ratePerKm').value);
+            
+            // Update company name in header
+            document.querySelector('.logo-text').textContent = appData.settings.companyName;
+            
+            alert('Settings saved successfully!');
+        });
+
+        // Change admin password
+        document.getElementById('changePasswordBtn').addEventListener('click', function() {
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (!currentPassword || !newPassword || !confirmPassword) {
+                alert('Please fill in all password fields.');
+                return;
+            }
+            
+            if (currentPassword !== appData.adminPassword) {
+                alert('Current password is incorrect.');
+                return;
+            }
+            
+            if (newPassword !== confirmPassword) {
+                alert('New passwords do not match.');
+                return;
+            }
+            
+            if (newPassword.length < 6) {
+                alert('New password must be at least 6 characters long.');
+                return;
+            }
+            
+            // Update password
+            appData.adminPassword = newPassword;
+            localStorage.setItem('adminPassword', newPassword);
+            
+            // Clear form
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+            
+            alert('Password changed successfully!');
+        });
+
+        // Close modals
+        document.querySelectorAll('.close-modal').forEach(button => {
+            button.addEventListener('click', function() {
+                this.closest('.modal').style.display = 'none';
+            });
+        });
+
+        // Close success modal
+        function closeSuccessModal() {
+            document.getElementById('successModal').style.display = 'none';
+        }
+
+        // Scroll to request section
+        function scrollToRequest() {
+            document.getElementById('request').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+            }
+        });
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load settings into form
+            document.getElementById('companyName').value = appData.settings.companyName;
+            document.getElementById('contactEmail').value = appData.settings.contactEmail;
+            document.getElementById('contactPhone').value = appData.settings.contactPhone;
+            document.getElementById('baseFare').value = appData.settings.baseFare;
+            document.getElementById('ratePerKm').value = appData.settings.ratePerKm;
+        });
+
+        // Destination input listener for cost estimation
+        document.getElementById('destination').addEventListener('input', function() {
+            const destination = this.value;
+            const locationShared = document.getElementById('getLocationBtn').dataset.location;
+            
+            if (destination && locationShared) {
+                calculateEstimatedCost(destination);
+            }
+        });
+    </script>
+</body>
+</html>
